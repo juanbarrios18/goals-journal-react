@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
+body {
+  background-color: #9266ff;
+}
+
+.title h2{
+  text-align: center;
+  color: beige;
+  font-size: 28px;
+  margin: 0px;
+}
+
+.app {
+  background-color: #3f3160;
+  min-height: 400px;
+  width: 380px;
+  margin: 60px auto;
+  padding: 15px 5px;
+  border-radius: 20px;
+}
+
+#to-do-form input{
+  background-color: rgba(27, 112, 137, 1);
+  padding: 0 20px;
+  margin: 20px;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 200;
+}
+
+#to-do-form input::placeholder {
+  color: #fff;
+}
+
+#to-do-form input:focus, #to-do-form button:focus {
+  outline: none;
+}
+
+#to-do-form button {
+  height: 50px;
+  width: 100px;
+  border-radius: 5px;
+  border: 0;
+  margin: 0;
+  background-color: rgba(202, 156, 24, 1);
+  cursor: pointer;
+  font-weight: bolder;
+  color: #fff;
+}

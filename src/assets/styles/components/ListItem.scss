@@ -1,0 +1,94 @@
+.list {
+  color: #fff;
+  height: 50px;
+  width: 300px;
+  margin: 20px auto;
+  border-radius: 5px;
+  background-color: #bf07ac;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list p {
+  width: 300px;
+  margin-top: 16px;
+  padding: 0px;
+  position: relative;
+  transition: ease-in-out;
+}
+
+.list p input[type='text'] {
+  background-color: transparent;
+  font-size: 19px;
+  border: 0;
+  margin: auto 0px;
+  width: 85%;
+  color: #fff;
+  font-weight: bolder;
+}
+
+.list p input:focus {
+  outline: none;
+}
+
+.list p span{
+  position: absolute;
+  right: 8px;
+  cursor: pointer
+}
+
+.faicons {
+  margin: 0 5px;
+}
+.round {
+  margin: auto 5px;
+  height: 30px;
+  width: 30px;
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 20px;
+  margin: 4px;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 4px;
+  left: 4px;
+  opacity: 0;
+  position: absolute;
+  top: 5px;
+  transform: rotate(-45deg);
+  width: 11px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #66bb6a;
+  border-color: #66bb6a;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.completed {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-decoration: line-through;
+}
