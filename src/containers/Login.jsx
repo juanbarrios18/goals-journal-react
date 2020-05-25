@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import LoginForm from '../components/LoginForm'
+import WelcomeNavbar from '../components/WelcomeNavbar'
+import { Redirect } from 'react-router-dom'
 
-const Login = ({ myList, trends, originals }) => {
+const Login = () => {
+  const [auth, setAuth] = useState(false)
+  const [error, setError] = useState(false)
+
   return (
     <>
-      <LoginForm />
+      <WelcomeNavbar />
+      {auth ? <Redirect to='/home' /> : null}
+      <LoginForm setAuth={setAuth} auth={auth} setError={setError} error={error} />
     </>
   )
 }

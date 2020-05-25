@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import apiService from '../services/apiServices'
-import '../assets/styles/components/LoginForm.scss'
-import { Link, Redirect } from 'react-router-dom'
+import '../assets/styles/components/signupForm.scss'
+import { Link } from 'react-router-dom'
 
-const LoginForm = ({ setAuth, setError, error, auth }) => {
+const SignupForm = () => {
   const [data, setData] = useState({
     username: '',
     password: '',
     error: false,
     userId: null
   })
-
   const handleInput = (e) => {
     const { name, value } = e.target
     setData({
@@ -19,36 +18,23 @@ const LoginForm = ({ setAuth, setError, error, auth }) => {
     })
   }
 
-  const handleLogin = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault()
-    console.log('ok')
     const userId = window.localStorage.userId || null
     if (userId) {
       setData({ userId })
+      return data.userId
     }
     apiService.login(data)
-      .then(res => {
-        if (res.data === 'no user') {
-          setError(true)
-        } else {
-          setAuth(true)
-          window.localStorage.setItem('userId', res.data)
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        setAuth(false)
-        setError(true)
-      })
   }
 
   return (
     <div className='loginContainer'>
-      <form onSubmit={handleLogin} className='login-form'>
+      <form onSubmit={handleSignup} className='signup-form'>
         <div className='loginForm'>
-          <div className='loginHeader'>
-            <h2>Welcome . . !</h2>
-            <p>login and get all yours goal's done </p>
+          <div className='signupHeader'>
+            <h2>Hello . . !</h2>
+            <p>register and get all yours goal's done </p>
           </div>
           <div className='usernameGroup'>
             <label htmlFor='username'>Username</label>
@@ -59,14 +45,13 @@ const LoginForm = ({ setAuth, setError, error, auth }) => {
             <input type='password' name='password' onChange={handleInput} />
           </div>
           <div className='signup'>
-            <p id='error' hidden={error === false}>Intenta de nuevo</p>
-            <p>Not registered yet?,  <Link to='/signup'>Signup</Link></p>
+            <p>Registered?,  <Link to='/'>Login</Link></p>
           </div>
         </div>
-        <button id='formButton'>Login</button>
+        <button id='formButton'>Signup</button>
       </form>
     </div>
   )
 }
 
-export default LoginForm
+export default SignupForm

@@ -1,23 +1,47 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ListItem from '../components/ListItem'
 import '../assets/styles/components/Notes.scss'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Container } from 'react-bootstrap'
-import ApiServices from '../services/apiServices'
+import { faTimes, faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { Spinner } from 'react-bootstrap'
+import apiServices from '../services/apiServices'
+import classNames from 'classnames'
 
-library.add(faTrash)
+library.add(faTimes, faAngleDown)
 
 const Notes = (props) => {
   const { type, priority } = props
+  const [update, setUpdate] = useState(true)
   const [items, setItems] = useState([])
   const [currentItem, setCurrentItem] = useState({
     name: '',
     date: '',
-    status: 'active',
-    priority: priority,
-    type: type
+    status: { selected: 'active' },
+    priority: { selected: priority },
+    type: { selected: type },
+    userId: window.localStorage.userId,
+    _id: 'currentItem'
   })
+  useEffect(() => {
+    getBullets()
+  }, [])
+
+  useEffect(() => {
+    if (update) {
+      getBullets()
+      setTimeout(() => setUpdate(false), 800)
+    }
+  }, [update])
+
+  const getBullets = () => {
+    const userid = window.localStorage.userId || ''
+    apiServices.getBullets(userid)
+      .then(res => {
+        setItems(res)
+      })
+      .catch(err => console.log(err))
+  }
   const HandleType = type => {
     let noteTitle = ''
     switch (type) {
@@ -39,94 +63,96 @@ const Notes = (props) => {
       case 'review':
         noteTitle = 'Daily Review'
         break
+      case 'goal':
+        noteTitle = 'Your Goals'
+        break
       default:
         noteTitle = ''
     }
     return noteTitle
   }
-
   const handleInput = (e) => {
-    // console.log(JSON.stringify(items))
+    // console.log(JSON.stringify(currentItem))
     setCurrentItem({
       ...currentItem,
       name: e.target.value,
-      date: Date.now()
+      date: Date.now(),
+      userId: window.localStorage.userId
     })
   }
 
   const handleAddItem = (e) => {
     e.preventDefault()
-    const newItem = currentItem
-    if (newItem.name !== '') {
-      const newItems = [...items, newItem]
-      setItems(newItems)
-      setCurrentItem({
-        name: '',
-        date: '',
-        status: 'active',
-        priority: priority,
-        type: type
-      })
-    }
+    apiServices.newBullet(currentItem)
+      .then(res => setUpdate(true))
+      .catch(err => console.log(err))
+
+    setCurrentItem({
+      name: '',
+      date: '',
+      status: { selected: 'active' },
+      priority: { selected: priority },
+      type: { selected: type },
+      userId: '',
+      _id: 'currentItem'
+    })
   }
 
-  const completedTask = (date) => {
-    const newItems = items.map(item => {
-      if (item.date === date) {
-        return {
-          ...item,
-          status: item.status === 'completed' ? 'active' : 'completed'
+  const completedTask = (id) => {
+    const item = items.filter(item => {
+      if (item._id === id) {
+        if (item.status.selected === 'completed') {
+          item.status.selected = 'active'
+          return item
         }
+        item.status.selected = 'completed'
+        return item
       }
-      return item
     })
-    console.log(newItems)
-    setItems(newItems)
-    console.log('after' + JSON.stringify(items))
+    apiServices.updateBullet(id, item[0])
   }
 
-  const updateItem = (text, date) => {
-    const newItems = items.map(item => {
-      if (item.date === date) {
-        item.name = text
-      }
-      return item
-    })
-    // API SERVICE UPDATE
-    setItems(newItems)
+  const updateItem = (id, data) => {
+    setUpdate(true)
   }
-
-  const deleteItem = (date) => {
-    // API SERVICE -> DELETE
-    const filteredItems = items.filter(item => item.date !== date)
-    setItems(filteredItems)
-  }
-
+  const noteClass = classNames('note', type)
   return (
-    <Container fluid>
-      <div className='app'>
+    <>
+      <div className={noteClass}>
         <header className='header'>
           <div className='title'>
             <h2>{HandleType(type)}</h2>
+            <Spinner
+              animation='grow'
+              variant='warning'
+              hidden={!update}
+            />
           </div>
-          <form id='to-do-form' onSubmit={handleAddItem}>
+          <form className='to-do-form' name='todoform' onSubmit={handleAddItem}>
             <input
               type='text'
-              placeholder='Enter task'
+              placeholder={(type === 'goal') ? 'Enter goal . . .' : 'Enter task . . .'}
               value={currentItem.name || ''}
               onChange={handleInput}
             />
-            <button type='submit'>Add</button>
+            <button type='submit'>
+              <span>
+                <FontAwesomeIcon
+                  className='faiconsAD-notes'
+                  icon='angle-down'
+                />
+              </span>
+            </button>
           </form>
         </header>
         <ListItem
           items={items}
-          deleteItem={deleteItem}
-          updateItem={updateItem}
-          completedTask={completedTask}
+          type={type}
+          priority={priority}
+          update={update}
         />
       </div>
-    </Container>
+    </>
   )
 }
 export default Notes

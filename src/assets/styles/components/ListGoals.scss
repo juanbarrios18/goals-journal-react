@@ -1,41 +1,66 @@
-.list {
+.goallist {
   color: #fff;
-  height: 30px;
-  max-width: 450px;
-  width: 88%;
-  margin: 5px auto;
+  height: 80px;
+  max-width: 1200px;
+  width: 95%;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 0px 10px;
+  position: relative;
+  margin-top: 30px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-.list p {
+#first {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.goalsItem {
   width: 90%;
-  margin-top: 16px;
   padding: 0px;
   position: relative;
   transition: ease-in-out;
+  display: flex;
 }
 
-.list p input[type='text'] {
+.goalsItem [class^='col-lg'] {
+  padding: 0;
+}
+
+.goalsItem input {
   background-color: transparent;
   font-size: 16px;
   border: 0;
   margin: auto 0px;
+  max-width: 90%;
   width: 85%;
   color: rgba(0,0,0, 0.7);
   font-weight: bolder;
   text-align: left;
 }
 
-.list p input:focus {
+.goalsItem input:focus {
   outline: none;
 }
 
-.list p span{
+.goalsItem input[name='name'] {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.goalsItem input[name='deadline'] {
+  margin-top: 15px;
+}
+
+.goalsItem input[name='description'] {
+  font-weight: lighter;
+}
+
+.goallist span{
   position: absolute;
   right: 8px;
+  top: 15px;
   cursor: pointer
 }
 
@@ -49,27 +74,27 @@
   color: rgba(214, 69, 65, 1);
 }
 
-.round {
+.goalRound {
   margin: auto 5px;
   height: 30px;
   width: 30px;
-  position: relative;
+  left: 0;
 }
 
-.round label {
+.goalRound label {
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
   cursor: pointer;
   height: 20px;
-  left: 0;
+  left: 5px;
   position: absolute;
-  top: 0;
+  top: 20px;
   width: 20px;
   margin: 4px;
 }
 
-.round label:after {
+.goalRound label:after {
   border: 2px solid #fff;
   border-top: none;
   border-right: none;
@@ -83,11 +108,11 @@
   width: 11px;
 }
 
-.round input[type="checkbox"] {
+.goalRound input[type="checkbox"] {
   visibility: hidden;
 }
 
-.round input[type="checkbox"]:checked + label {
+.goalRound input[type="checkbox"]:checked + label {
   background-color: #66bb6a;
   border-color: #66bb6a;
 }

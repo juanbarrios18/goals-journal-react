@@ -1,51 +1,119 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../assets/styles/components/listItem.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FlipMove from 'react-flip-move'
-import { library } from '@fortawesome/fontawesome-svg-core'
-library.add()
+import classNames from 'classnames'
+import apiServices from '../services/apiServices'
+
 function ListItem (props) {
-  const { items } = props
-  const handleChange = (date) => {
-    props.completedTask(date)
+  const { items, type } = props
+  const [listItems, setListItems] = useState([])
+
+  // console.log(items.length, update, countItems)
+  useEffect(() => {
+    setListItems([...items])
+  }, [items])
+
+  const toggleCompleted = (e, id) => {
+    let newItem = []
+    const newItems = items.map(item => {
+      if (item._id === id) {
+        if (item.status.selected === 'active') {
+          item.status.selected = 'completed'
+        } else {
+          item.status.selected = 'active'
+        }
+        newItem = item
+        return item
+      }
+      return item
+    })
+    setListItems(newItems)
+    console.log(newItem)
+    apiServices.updateBullet(id, newItem)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
-  const listItems = items.map(item => {
-    return (
-      <div className='list' key={item.date}>
-        <div className='round'>
-          <input
-            type='checkbox'
-            id={item.date}
-            onChange={() => handleChange(item.date)}
-            checked={item.status === 'completed'}
-          />
-          <label htmlFor={item.date} />
-        </div>
-        <p>
-          <input
-            className={item.status === 'completed' ? 'completed' : ''}
-            type='text'
-            id={item.date}
-            value={item.name}
-            onChange={(e) => props.updateItem(e.target.value, item.date)}
-          />
-          <span>
-            <FontAwesomeIcon
-              className='faicons'
-              icon='trash'
-              onClick={() => {
-                props.deleteItem(item.date)
-              }}
+
+  const completedClass = (x) => {
+    return classNames({ completed: x })
+  }
+
+  const handleChange = (e, id) => {
+    const data = e.target.value
+    const newItems = listItems.map(item => {
+      if (item._id === id) {
+        item.name = data
+      }
+      return item
+    })
+    setListItems(newItems)
+  }
+
+  const updateChange = (e, id) => {
+    const name = e.target.value
+    const newItem = items.filter(item => {
+      if (item._id === id) {
+        item.name = name
+        return item
+      }
+    })
+    apiServices.updateBullet(id, newItem[0])
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+  }
+
+  const deleteItem = (id) => {
+    apiServices.deleteBullet(id)
+    const newItems = items.map(item => {
+      if (item._id === id) {
+        item.status.selected = 'deleted'
+        return item
+      } else {
+        return item
+      }
+    })
+    setListItems(newItems)
+  }
+
+  const ListItems = listItems.map(item => {
+    if (item.type.selected === type && item.status.selected !== 'deleted') {
+      return (
+        <div className='list' key={item._id}>
+          <div className='round'>
+            <input
+              type='checkbox'
+              id={item._id}
+              onChange={(e) => toggleCompleted(e, item._id)}
+              checked={item.status.selected === 'completed'}
             />
-          </span>
-        </p>
-      </div>
-    )
+            <label htmlFor={item._id} />
+          </div>
+          <p>
+            <input
+              className={completedClass(item.status.selected === 'completed')}
+              type='text'
+              id={item._id}
+              value={item.name}
+              onChange={(e) => handleChange(e, item._id)}
+              onBlur={(e) => updateChange(e, item._id)}
+            />
+            <span>
+              <FontAwesomeIcon
+                className='faicons'
+                icon='times'
+                onClick={() => deleteItem(item._id)}
+              />
+            </span>
+          </p>
+        </div>
+      )
+    }
   })
   return (
     <div>
       <FlipMove duration={400} easing='ease-in-out'>
-        {listItems}
+        {ListItems}
       </FlipMove>
     </div>
   )

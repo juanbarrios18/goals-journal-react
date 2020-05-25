@@ -10,3 +10,40 @@ body {
 * {
   box-sizing: border-box;
 }
+
+@media screen and (min-width: 600px) {
+  .secondary,  .primary, .aditional {
+    margin-right: 0 !important;
+  }
+
+  .goalsItem input[name='deadline'] {
+    text-align: right;
+  }
+
+  .goalsItem input[name='name'] {
+    font-size: 30px !important
+  }
+
+  .goal-ul {
+    padding-left: 30px;
+  }
+
+  #today {
+    margin-right: 90px;
+    font-size: 20px;
+  }
+
+  .date-controls {
+    align-items: center;
+    margin-right: 500px;
+    margin-bottom: 5px;
+  }
+
+  .date-controls input {
+    margin-left: 40px;
+    margin-right: 0px;
+  }
+
+
+}
+

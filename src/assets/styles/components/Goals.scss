@@ -18,12 +18,22 @@ body {
   font-family: 'Permanent Marker', cursive;
 }
 
+.faiconsAD {
+  height: 35px !important;
+  position: absolute;
+  right: 30px;
+}
+
+.faiconsAD:hover {
+  cursor: pointer;
+}
+
 .note {
   min-height: 400px;
   max-width: 520px;
   width: 90%;
   margin: 40px auto;
-  padding: 0px;
+  padding-bottom: 15px;
   -webkit-transform: rotate(-1.5deg);
   -moz-transform: rotate(-1.5deg);
   -o-transform: rotate(-1.5deg);
@@ -42,24 +52,33 @@ body {
   max-width: 400px;;
 }
 
+.goal {
+  background-color: rgba(220,255,70,1);
+  margin-bottom: 0px;
+  max-width: 1070px;
+  transform: rotate(-0.5deg);
+}
+
 .header {
   width: 100%;
 }
 
-.to-do-form {
-  margin-top: 2px;
+.goals-form {
+  z-index: +1;
+  margin: 0px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.to-do-form input{
-  background-color: rgba(27, 112, 137, 0.01);
+.goals-form input{
+  width: 80%;
+  text-align: start;
+  background-color: transparent;
   padding: 0 20px;
   margin: 10px;
   margin-top: 0px;
-  max-width: 550px;
-  width: 80%;
   height: 50px;
   border: none;
   border-bottom: 2px solid rgba(0,0,0,0.3);
@@ -67,28 +86,40 @@ body {
   font-size: 18px;
 }
 
-.to-do-form input::placeholder {
+.goals-form input[type="date"] {
+  width: 70%;
+}
+
+.goals-form input::placeholder {
   color: rgba(0,0,0,0.3);
   font-weight: bolder;
 }
 
-.to-do-form input:focus, #to-do-form button:focus {
+.goals-form input:focus, #to-do-form button:focus {
   outline: none;
 }
 
-.to-do-form button {
+.goals-form button {
   height: 50px;
   max-width: 100px;
   width: 20%;
   border-radius: 5px;
   border: 0;
   margin: 10px 10px;
-  margin-top: 0px;
   background-color: rgba(202, 156, 24, 0.01);
   cursor: pointer;
   font-weight: bolder;
   font-size: 35px;
   color: black;
-  position: absolute;
-  right: 10px;
+  display: block;
+}
+
+.deadline {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.deadline button .faiconsAD {
+  height: 10px;
 }
