@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../containers/Home'
 import Login from '../containers/Login'
 import Signup from '../containers/Signup'
-import Layout from '../components/Layout'
 
 const App = () => (
   <BrowserRouter>
