@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import apiService from '../services/apiServices'
-import '../assets/styles/components/signupForm.scss'
+import '../assets/styles/components/SignupForm.scss'
 import { Link } from 'react-router-dom'
 
 const SignupForm = ({ setAuth, setError, error, auth }) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../assets/styles/components/listItem.scss'
+import '../assets/styles/components/ListItem.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FlipMove from 'react-flip-move'
 import classNames from 'classnames'

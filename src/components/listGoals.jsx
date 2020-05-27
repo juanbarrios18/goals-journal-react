@@ -7,7 +7,7 @@ import { Row, Col, Container } from 'react-bootstrap'
 import apiServices from '../services/apiServices'
 import moment from 'moment'
 
-function ListItem (props) {
+function ListGoals (props) {
   const { items, dateFilter } = props
   const [listItems, setListItems] = useState([])
   const [until, setUntil] = useState(0)
@@ -153,4 +153,4 @@ function ListItem (props) {
   )
 }
 
-export default ListItem
+export default ListGoals
