@@ -6,11 +6,15 @@ const http = axios.create({
 })
 
 // LOGIN
-const createUser = ({ username, password }) =>
-  axios.post('/signup', { username, password })
+const createUser = ({ username, password }) => {
+  return new Promise((resolve, reject) => {
+    http.post('/signup', { username, password })
+      .then(res => resolve(res))
+      .catch(err => reject(err))
+  })
+}
 
 const login = ({ username, password }) => {
-  console.log('hols')
   return new Promise((resolve, reject) => {
     http.post('/login', { username, password })
       .then(res => resolve(res))

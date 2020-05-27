@@ -17,8 +17,12 @@ const welcomeNavbar = () => {
           <Nav.Link href='#features'>How to</Nav.Link>
         </Nav>
         <Nav>
-          <Link to='/'>Login</Link>
-          <Link to='/signup'>Singup</Link>
+          <div className='link-right'>
+            <Link to='/'>Login</Link>
+          </div>
+          <div className='link-right'>
+            <Link to='/signup'>Singup</Link>
+          </div>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

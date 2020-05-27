@@ -11,7 +11,7 @@ import classNames from 'classnames'
 library.add(faTimes, faAngleDown, faPlus, faMinus)
 
 const Notes = (props) => {
-  const { type, priority } = props
+  const { type, priority, dateFilter } = props
   const [update, setUpdate] = useState(true)
   const [items, setItems] = useState([])
   const [toggleForm, setToggleForm] = useState(true)
@@ -151,6 +151,7 @@ const Notes = (props) => {
           priority={priority}
           update={update}
           updateItem={updateItem}
+          dateFilter={dateFilter}
         />
       </div>
     </>

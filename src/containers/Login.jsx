@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import LoginForm from '../components/LoginForm'
+import React, { useState } from 'react'
 import WelcomeNavbar from '../components/WelcomeNavbar'
 import { Redirect } from 'react-router-dom'
+import LoginForm from '../components/LoginForm'
 
 const Login = () => {
   const [auth, setAuth] = useState(false)

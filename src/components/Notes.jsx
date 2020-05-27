@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import ListItem from '../components/ListItem'
-import '../assets/styles/components/Notes.scss'
+import apiServices from '../services/apiServices'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTimes, faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { Spinner } from 'react-bootstrap'
-import apiServices from '../services/apiServices'
 import classNames from 'classnames'
+import '../assets/styles/components/Notes.scss'
 
 library.add(faTimes, faAngleDown)
 
 const Notes = (props) => {
-  const { type, priority } = props
+  const { type, priority, dateFilter } = props
   const [update, setUpdate] = useState(true)
   const [items, setItems] = useState([])
   const [currentItem, setCurrentItem] = useState({
@@ -23,9 +23,18 @@ const Notes = (props) => {
     userId: window.localStorage.userId,
     _id: 'currentItem'
   })
+
   useEffect(() => {
     getBullets()
   }, [])
+
+  useEffect(() => {
+    setCurrentItem({
+      ...currentItem,
+      date: dateFilter
+    })
+    getBullets()
+  }, [dateFilter])
 
   useEffect(() => {
     if (update) {
@@ -63,20 +72,15 @@ const Notes = (props) => {
       case 'review':
         noteTitle = 'Daily Review'
         break
-      case 'goal':
-        noteTitle = 'Your Goals'
-        break
       default:
         noteTitle = ''
     }
     return noteTitle
   }
   const handleInput = (e) => {
-    // console.log(JSON.stringify(currentItem))
     setCurrentItem({
       ...currentItem,
       name: e.target.value,
-      date: Date.now(),
       userId: window.localStorage.userId
     })
   }
@@ -98,23 +102,6 @@ const Notes = (props) => {
     })
   }
 
-  const completedTask = (id) => {
-    const item = items.filter(item => {
-      if (item._id === id) {
-        if (item.status.selected === 'completed') {
-          item.status.selected = 'active'
-          return item
-        }
-        item.status.selected = 'completed'
-        return item
-      }
-    })
-    apiServices.updateBullet(id, item[0])
-  }
-
-  const updateItem = (id, data) => {
-    setUpdate(true)
-  }
   const noteClass = classNames('note', type)
   return (
     <>
@@ -150,6 +137,7 @@ const Notes = (props) => {
           type={type}
           priority={priority}
           update={update}
+          dateFilter={dateFilter}
         />
       </div>
     </>

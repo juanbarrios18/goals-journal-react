@@ -3,7 +3,7 @@ import apiService from '../services/apiServices'
 import '../assets/styles/components/signupForm.scss'
 import { Link } from 'react-router-dom'
 
-const SignupForm = () => {
+const SignupForm = ({ setAuth, setError, error, auth }) => {
   const [data, setData] = useState({
     username: '',
     password: '',
@@ -25,7 +25,12 @@ const SignupForm = () => {
       setData({ userId })
       return data.userId
     }
-    apiService.login(data)
+    apiService.createUser(data)
+      .then(res => setAuth(true))
+      .catch(err => {
+        console.log(err)
+        setError(true)
+      })
   }
 
   return (
@@ -45,6 +50,7 @@ const SignupForm = () => {
             <input type='password' name='password' onChange={handleInput} />
           </div>
           <div className='signup'>
+            <p id='error' hidden={error === false}>User already exists</p>
             <p>Registered?,  <Link to='/'>Login</Link></p>
           </div>
         </div>

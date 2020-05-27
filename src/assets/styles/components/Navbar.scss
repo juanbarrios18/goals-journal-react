@@ -1,38 +1,19 @@
 .navbar-brand {
   font-family: 'Permanent Marker', cursive;
   font-size: 1.5rem;
+  margin-right: 20px;
 }
 
-#today {
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+#logout {
+  color: rgba(240, 52, 52, 0.8);
   font-weight: bolder;
-  color: white;
-  vertical-align: middle;
+  padding: 8px;
 }
 
-#today:hover {
-  color: rgba(255, 255, 255, 0.8);
-}
-.angles {
-  width: 50px;
-}
-#maindate {
-  color: white;
-  background: transparent !important;
-  border: 0px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
-  display: block;
-}
-
-.date-controls {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-}
-
-.faiconsAD-nav {
-  width: 100px;
-  font-size: 30px;
-  color: white;
-
+#logout:hover {
+  cursor: pointer;
 }

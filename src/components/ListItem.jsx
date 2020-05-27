@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import FlipMove from 'react-flip-move'
 import classNames from 'classnames'
 import apiServices from '../services/apiServices'
+import moment from 'moment'
 
 function ListItem (props) {
-  const { items, type } = props
+  const { items, type, dateFilter } = props
   const [listItems, setListItems] = useState([])
 
   // console.log(items.length, update, countItems)
@@ -77,7 +78,8 @@ function ListItem (props) {
   }
 
   const ListItems = listItems.map(item => {
-    if (item.type.selected === type && item.status.selected !== 'deleted') {
+    const dateM = moment(item.date).format('YYYY-MM-DD')
+    if (item.type.selected === type && item.status.selected !== 'deleted' && dateFilter === dateM) {
       return (
         <div className='list' key={item._id}>
           <div className='round'>

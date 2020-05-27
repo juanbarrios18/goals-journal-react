@@ -11,9 +11,21 @@ body {
   box-sizing: border-box;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: black !important;
+}
+
 @media screen and (min-width: 600px) {
   .secondary,  .primary, .aditional {
     margin-right: 0 !important;
+  }
+
+  .note.goal {
+    margin: 0px auto;
   }
 
   .goalsItem input[name='deadline'] {
@@ -28,22 +40,25 @@ body {
     padding-left: 30px;
   }
 
-  #today {
-    margin-right: 90px;
-    font-size: 20px;
+  #logout {
+    margin-left: 20px;
   }
 
   .date-controls {
     align-items: center;
-    margin-right: 500px;
+    margin-right: 300px;
     margin-bottom: 5px;
   }
 
   .date-controls input {
     margin-left: 40px;
     margin-right: 0px;
+    max-width: 230px;
   }
 
-
+  .until { 
+    text-align: right;
+    margin-top: 15px;
+  }
 }
 

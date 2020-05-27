@@ -5,10 +5,12 @@ import FlipMove from 'react-flip-move'
 import classNames from 'classnames'
 import { Row, Col, Container } from 'react-bootstrap'
 import apiServices from '../services/apiServices'
+import moment from 'moment'
 
 function ListItem (props) {
-  const { items } = props
+  const { items, dateFilter } = props
   const [listItems, setListItems] = useState([])
+  const [until, setUntil] = useState(0)
 
   useEffect(() => {
     setListItems(items)
@@ -74,13 +76,18 @@ function ListItem (props) {
         return item
       }
     })
-    console.log(newItems)
     setListItems(newItems)
   }
 
+  const untilDeadline = (deadline) => {
+    const deadlineM = moment(deadline).format('DD')
+    const dateFilterM = moment(dateFilter).format('DD')
+    return (deadlineM - dateFilterM)
+  }
+
   const ListItems = listItems.map(item => {
-    console.log(item)
-    if (item.status.selected !== 'deleted') {
+    const dealine = untilDeadline(item.deadline)
+    if (item.status.selected !== 'deleted' && dealine > 0) {
       return (
         <div className='goallist' key={item._id}>
           <div className='goalRound'>
@@ -108,11 +115,7 @@ function ListItem (props) {
                   />
                 </Col>
                 <Col lg={4}>
-                  <input
-                    type='text'
-                    name='deadline'
-                    value='90 Days until deadline'
-                  />
+                  <p className='until'><input id='until' value={untilDeadline(item.deadline)} />Days until deadline</p>
                 </Col>
               </Row>
               <Row>

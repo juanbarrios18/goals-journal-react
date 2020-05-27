@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import apiService from '../services/apiServices'
+import { Link } from 'react-router-dom'
 import '../assets/styles/components/LoginForm.scss'
-import { Link, Redirect } from 'react-router-dom'
 
 const LoginForm = ({ setAuth, setError, error, auth }) => {
   const [data, setData] = useState({
