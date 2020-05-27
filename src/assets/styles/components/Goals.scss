@@ -42,21 +42,11 @@ body {
   box-shadow: 0 10px 10px 1px rgba(0,0,0,0.2);
 }
 
-.primary, .secondary, .aditional {
-  background-color: rgb(27,168,177);
-}
-
-.event, .notes, .review {
-  background-color: rgba(255, 254, 170, 1);
-  transform: rotate(1.5deg);
-  max-width: 400px;;
-}
-
 .goal {
   background-color: rgba(220,255,70,1);
   margin: 0px auto;
   max-width: 1000px;
-  transform: rotate(-0.5deg);
+  transform: rotate(-1deg);
 }
 
 .header {

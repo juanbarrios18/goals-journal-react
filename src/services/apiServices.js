@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:8080/'
+const URL = 'https://goals-journal--api.herokuapp.com/'
 const http = axios.create({
   baseURL: URL
 })
@@ -15,6 +15,7 @@ const createUser = ({ username, password }) => {
 }
 
 const login = ({ username, password }) => {
+  console.log(URL)
   return new Promise((resolve, reject) => {
     http.post('/login', { username, password })
       .then(res => resolve(res))
