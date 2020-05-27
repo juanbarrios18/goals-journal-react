@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ListGoals from '../components/ListGoals'
+import ListGoals from './ListGoal'
 import '../assets/styles/components/Goals.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
