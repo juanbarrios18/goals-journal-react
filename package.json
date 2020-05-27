@@ -1,6 +1,9 @@
 {
   "name": "goals-journal-react",
   "version": "0.1.0",
+  "engines": {
+    "node": "12.16.x"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -24,8 +27,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "node server.js"
+    "dev": "node server.js",
+    "heroku-postbuild": "webpack --mode production"
   },
   "eslintConfig": {
     "extends": "react-app"
