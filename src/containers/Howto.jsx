@@ -10,7 +10,7 @@ const Howto = () => {
       {(user)
         ? <Navbar />
         : <WelcomeNavbar />}
-      <img src={instructions} id='instructions' width='1000'/>
+      <img src={instructions} alt='instructions' id='instructions' width='1000' />
     </>
   )
 }
