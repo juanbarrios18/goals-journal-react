@@ -28,7 +28,8 @@
   },
   "scripts": {
     "dev": "node server.js",
-    "heroku-postbuild": "webpack --mode production"
+    "heroku-postbuild": "webpack --mode production",
+    "dev-server": "webpack-dev-server --open --mode development"
   },
   "eslintConfig": {
     "extends": "react-app"

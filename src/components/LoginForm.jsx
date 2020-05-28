@@ -13,13 +13,22 @@ const LoginForm = ({ setAuth, setError, error, auth }) => {
 
   const handleInput = (e) => {
     const { name, value } = e.target
-    setData({
-      ...data,
-      [name]: value
-    })
+    if (name === 'username') {
+      const lowerCase = value.toLowerCase()
+      setData({
+        ...data,
+        username: lowerCase
+      })
+    } else {
+      setData({
+        ...data,
+        [name]: value
+      })
+    }
   }
 
   const handleLogin = (e) => {
+    window.localStorage.setItem('username', data.username)
     e.preventDefault()
     console.log('ok')
     const userId = window.localStorage.userId || null
@@ -47,7 +56,7 @@ const LoginForm = ({ setAuth, setError, error, auth }) => {
       <form onSubmit={handleLogin} className='login-form'>
         <div className='loginForm'>
           <div className='loginHeader'>
-            <h2>Welcome . . !</h2>
+            <h2>Login . . !</h2>
             <p>login and get all yours goal's done </p>
           </div>
           <div className='usernameGroup'>
@@ -58,8 +67,8 @@ const LoginForm = ({ setAuth, setError, error, auth }) => {
             <label htmlFor='password'>Password</label>
             <input type='password' name='password' onChange={handleInput} />
           </div>
-          <div className='signup'>
-            <p id='error' hidden={error === false}>Intenta de nuevo</p>
+          <div className='errorMessage'>
+            <p className='error' hidden={error === false}>Intenta de nuevo</p>
             <p>Not registered yet?,  <Link to='/signup'>Signup</Link></p>
           </div>
         </div>

@@ -127,11 +127,12 @@ input:focus {
   outline: none;
 }
 
-#error {
+.error {
   color: red;
-  position: absolute;
-  bottom: +40px;
-  left: +100px;
   font-weight: 400;
+  margin-bottom: 5px;
 }
 
+.message {
+  margin: auto;
+}
