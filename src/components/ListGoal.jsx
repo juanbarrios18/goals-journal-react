@@ -80,8 +80,8 @@ function ListGoal (props) {
   }
 
   const untilDeadline = (deadline) => {
-    const deadlineM = moment(deadline).format('DD')
-    const dateFilterM = moment(dateFilter).format('DD')
+    const deadlineM = moment(deadline).format('DDD')
+    const dateFilterM = moment(dateFilter).format('DDD')
     return (deadlineM - dateFilterM)
   }
 
