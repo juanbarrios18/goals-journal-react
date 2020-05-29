@@ -12,15 +12,10 @@ const welcomeNavbar = () => {
         Goal's Journal
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-      <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav>
-          <div className='link-right'>
-            <Link to='/'>Login</Link>
-          </div>
-          <div className='link-right'>
-            <Link to='/signup'>Singup</Link>
-          </div>
-        </Nav>
+      <Navbar.Toggle />
+      <Navbar.Collapse className='justify-content-end'>
+        <Nav.Link href='/login'>Login</Nav.Link>
+        <Nav.Link href='/signup'>Signup</Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   )

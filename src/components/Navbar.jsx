@@ -22,15 +22,10 @@ const NavBar = () => {
         <img src={Logo} alt='diana.png' height='40px' />
         Goal's Journal
       </Navbar.Brand>
-      <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-      <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav>
-          <Nav.Link eventKey={2} href='#memes'>
-            Hello, {username || ''}
-          </Nav.Link>
-          <Nav.Link href='/' id='logout' onClick={handleLogout}>Logout</Nav.Link>
-
-        </Nav>
+      <Navbar.Toggle />
+      <Navbar.Collapse className='justify-content-end'>
+        <Nav.Link href='/' id='username' onClick={handleLogout}>Hello, {username || ''}</Nav.Link>
+        <Nav.Link href='/' id='logout' onClick={handleLogout}>Logout</Nav.Link>
       </Navbar.Collapse>
     </Navbar>
   )
