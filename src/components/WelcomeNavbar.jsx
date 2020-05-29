@@ -13,9 +13,6 @@ const welcomeNavbar = () => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='responsive-navbar-nav' />
       <Navbar.Collapse id='responsive-navbar-nav'>
-        <Nav className='mr-auto'>
-          <Nav.Link href='#features'>How to</Nav.Link>
-        </Nav>
         <Nav>
           <div className='link-right'>
             <Link to='/'>Login</Link>
